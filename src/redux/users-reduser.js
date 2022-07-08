@@ -1,0 +1,153 @@
+import { usersAPI } from '../api/api'
+
+const SET_USERS = 'users/SET_USERS'
+const SET_USERS_DATA = 'users/SET_USERS_DATA'
+
+let initialState = {
+    users: { 
+        Kyivska: { 
+          G: { 
+            2017: { 
+              XX: { 
+                value: 150000, 
+                dateRelease: "2017-12-31", 
+              }, 
+              YY: { 
+                value: 100000, 
+                dateRelease: "2017-12-31", 
+              }, 
+              ZZ: { 
+                value: 77, 
+                dateRelease: "2017-12-31", 
+              }, 
+            }, 
+            2018: { 
+              XX: { 
+                value: 160000, 
+                dateRelease: "2018-12-31", 
+              }, 
+              YY: { 
+                value: 110000, 
+                dateRelease: "2018-12-31", 
+              }, 
+              ZZ: { 
+                value: 72, 
+                dateRelease: "2018-12-31", 
+              }, 
+            }, 
+            2019: { 
+              XX: { 
+                value: 130000, 
+                dateRelease: "2019-12-31", 
+              }, 
+              YY: { 
+                value: 85000, 
+                dateRelease: "2019-12-31", 
+              }, 
+              ZZ: { 
+                value: 72, 
+                dateRelease: "2019-12-31", 
+              }, 
+            }, 
+          }, 
+        }, 
+        Odeska: { 
+          G: { 
+            2017: { 
+              XX: { 
+                value: 10000, 
+                dateRelease: "2017-12-31", 
+              }, 
+              YY: { 
+                value: 5000, 
+                dateRelease: "2017-12-31", 
+              }, 
+              ZZ: { 
+                value: 45, 
+                dateRelease: "2017-12-31", 
+              }, 
+            }, 
+            2019: { 
+              XX: { 
+                value: 15000, 
+                dateRelease: "2019-12-01", 
+              }, 
+              YY: { 
+                value: 0, 
+                dateRelease: "2022-02-18", 
+              }, 
+              ZZ: { 
+                value: 0, 
+                dateRelease: "2022-02-18", 
+              }, 
+            }, 
+          }, 
+        }, 
+        Lvivska: { 
+          G: { 
+            2017: { 
+              XX: { 
+                value: 640000, 
+                dateRelease: "2017-12-31", 
+              }, 
+              YY: { 
+                value: 510000, 
+                dateRelease: "2017-08-01", 
+              }, 
+              ZZ: { 
+                value: 67, 
+                dateRelease: "2017-08-01", 
+              }, 
+            }, 
+            2018: { 
+              XX: { 
+                value: 740000, 
+                dateRelease: "2018-12-31", 
+              }, 
+              YY: { 
+                value: 530000, 
+                dateRelease: "2018-08-01", 
+              }, 
+              ZZ: { 
+                value: 61, 
+                dateRelease: "2018-08-01", 
+              }, 
+            }, 
+          }, 
+        }, 
+      },
+    usersData: [
+      {value: 4, date: '20-02-2022', user: 'Petro', comment: 'any'},
+      {value: 5, date: '21-02-2022', user: 'Roman', comment: 'any'},
+      {value: 6, date: '22-02-2022', user: 'Anna', comment: 'any'}
+    ]
+}
+
+const usersReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case SET_USERS:
+      return {
+        ...state, users: action.payload
+      }
+    case SET_USERS_DATA:
+      return {
+          ...state, 
+          usersData: [...state.usersData,  action.payload]
+        }
+      default:
+            return state;
+    }
+}
+
+export const setUsers = (users) => ({ type: SET_USERS, payload: users })
+export const setUsersData = (usersData) => ({ type: SET_USERS_DATA, payload: usersData })
+
+export const getUsers = () => async (dispatch) => {
+    let data = await usersAPI.getUsers()
+    dispatch(setUsers(data))
+  
+
+}
+
+export default usersReducer;
+
