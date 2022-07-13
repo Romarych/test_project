@@ -1,7 +1,7 @@
 import * as axios from "axios";
 
 const instance = axios.create({
-    baseURL: `/manifest.json`,
+    baseURL: `/data.json`,
 })
 
 export const  usersAPI = {

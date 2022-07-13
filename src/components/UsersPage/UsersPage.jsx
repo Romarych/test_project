@@ -26,7 +26,7 @@ export const UsersPage = () => {
     dispatch(getUsers())
   }, [])
 
-  const url = '/test-project#/window'
+  const url = '/test_project#/window'
   const params = 'width=800, height=400, left=200,top=200'
  
   return (
